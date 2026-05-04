@@ -309,7 +309,7 @@
 
   /* ===== FEATURES ===== */
   .features-section {
-    background: var(--navy);
+    background: #07161a;
   }
 
   .features-wrap {
@@ -326,57 +326,34 @@
   }
 
   .feature-card {
-    background: linear-gradient(145deg, rgba(61,122,119,0.25), rgba(26,53,51,0.6));
-    border: 1px solid rgba(178,223,219,0.18);
-    border-radius: 24px;
-    padding: 36px 30px;
-    transition: all 0.4s ease;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: border-color 0.3s ease, background 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
   }
 
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: -20px; right: -20px;
-    width: 120px; height: 120px;
-    background: radial-gradient(circle, rgba(184,147,74,0.18), transparent 70%);
-    transition: all 0.4s ease;
-  }
-
-  .feature-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(178,223,219,0.4), transparent);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
+  .feature-card::before { display: none; }
+  .feature-card::after { display: none; }
 
   .feature-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(178,223,219,0.45);
-    background: linear-gradient(145deg, rgba(61,122,119,0.4), rgba(26,53,51,0.75));
-    box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 40px rgba(178,223,219,0.08);
+    transform: none;
+    border-color: rgba(178,223,219,0.2);
+    background: rgba(255,255,255,0.05);
+    box-shadow: none;
   }
 
-  .feature-card:hover::before {
-    width: 220px; height: 220px;
-    background: radial-gradient(circle, rgba(184,147,74,0.22), transparent 70%);
+  .feature-marker {
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 24px;
   }
 
-  .feature-card:hover::after {
-    opacity: 1;
-  }
-
-  .feature-icon {
-    font-size: 40px;
-    margin-bottom: 20px;
-    display: block;
-    filter: drop-shadow(0 4px 12px rgba(178,223,219,0.3));
-  }
+  .feature-icon { display: none; }
 
   .feature-title {
     font-size: 20px;
@@ -393,7 +370,7 @@
 
   /* ===== PRICING ===== */
   .pricing-section {
-    background: var(--navy);
+    background: #07161a;
   }
 
   .pricing-wrap {
@@ -587,20 +564,52 @@
 
   .fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.4s ease;
-    animation: fadeInFallback 0.5s ease 0.1s both;
-  }
-
-  @keyframes fadeInFallback {
-    to { opacity: 1; transform: translateY(0); }
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    will-change: opacity, transform;
   }
 
   .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
-    animation: none;
   }
+
+  /* stagger siblings inside grids/lists */
+  .features-grid .fade-in:nth-child(1),
+  .pricing-grid  .fade-in:nth-child(1),
+  .grid-pro      .fade-in:nth-child(1),
+  .rev-carousel  .fade-in:nth-child(1) { transition-delay: 0s; }
+
+  .features-grid .fade-in:nth-child(2),
+  .pricing-grid  .fade-in:nth-child(2),
+  .grid-pro      .fade-in:nth-child(2),
+  .rev-carousel  .fade-in:nth-child(2) { transition-delay: 0.08s; }
+
+  .features-grid .fade-in:nth-child(3),
+  .pricing-grid  .fade-in:nth-child(3),
+  .grid-pro      .fade-in:nth-child(3),
+  .rev-carousel  .fade-in:nth-child(3) { transition-delay: 0.16s; }
+
+  .features-grid .fade-in:nth-child(4),
+  .pricing-grid  .fade-in:nth-child(4),
+  .grid-pro      .fade-in:nth-child(4),
+  .rev-carousel  .fade-in:nth-child(4) { transition-delay: 0.24s; }
+
+  .features-grid .fade-in:nth-child(5),
+  .rev-carousel  .fade-in:nth-child(5) { transition-delay: 0.32s; }
+
+  .features-grid .fade-in:nth-child(6),
+  .rev-carousel  .fade-in:nth-child(6) { transition-delay: 0.40s; }
+
+  .rev-carousel  .fade-in:nth-child(7) { transition-delay: 0.48s; }
+  .rev-carousel  .fade-in:nth-child(8) { transition-delay: 0.56s; }
+  .rev-carousel  .fade-in:nth-child(9) { transition-delay: 0.64s; }
+
+  .stats .fade-in:nth-child(1) { transition-delay: 0s; }
+  .stats .fade-in:nth-child(2) { transition-delay: 0.1s; }
+  .stats .fade-in:nth-child(3) { transition-delay: 0.2s; }
+  .stats .fade-in:nth-child(4) { transition-delay: 0.3s; }
 
   /* ===== SCROLL PROGRESS BAR ===== */
   #scroll-progress {
@@ -714,15 +723,14 @@
       top: 80px;
       left: 20px; right: 20px;
       border-radius: 24px;
-      background: rgba(15, 37, 35, 0.85);
+      background: rgba(15, 37, 35, 0.92);
       backdrop-filter: blur(30px) saturate(180%);
       -webkit-backdrop-filter: blur(30px) saturate(180%);
       border: 1px solid rgba(255,255,255,0.15);
       box-shadow: 0 16px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
-      z-index: 98;
+      z-index: 97;
       gap: 0;
       padding: 8px 0 16px;
-      /* hidden by default */
       opacity: 0;
       transform: translateY(-10px);
       pointer-events: none;
@@ -733,6 +741,8 @@
       transform: translateY(0);
       pointer-events: all;
     }
+    /* hamburger always on top */
+    .hamburger { position: relative; z-index: 100; }
     .nav-links li {
       border: none;
       border-bottom: 1px solid rgba(178,223,219,0.07);
@@ -954,6 +964,200 @@
 </head>
 <body>
 
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">
+      <span class="loader-ar">شاليهات</span>
+      <span class="loader-name">هشام العبد</span>
+    </div>
+    <div class="loader-loc">بورتو مطروح · الساحل الشمالي</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
+    </div>
+    <div class="loader-pct" id="loader-pct">0%</div>
+  </div>
+  <div class="loader-wave">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="rgba(61,122,119,0.25)"/>
+      <path d="M0,55 C480,10 960,70 1440,45 L1440,80 L0,80 Z" fill="rgba(178,223,219,0.12)"/>
+    </svg>
+  </div>
+</div>
+
+<style>
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: linear-gradient(160deg, #060e0d 0%, #0f2220 45%, #1a3533 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+body:has(#loader:not(.hidden)) {
+  overflow: hidden;
+}
+.loader-inner {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.loader-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.loader-ar {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: rgba(178,223,219,0.7);
+  letter-spacing: 4px;
+}
+.loader-name {
+  font-family: 'Amiri', serif;
+  font-size: clamp(36px, 8vw, 64px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  background: linear-gradient(90deg, #b8934a, #F1E4C0, #b8934a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 100%;
+  animation: shimmerText 2s linear infinite;
+}
+@keyframes shimmerText {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.loader-loc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 2px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+.loader-bar-wrap {
+  width: 200px;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  margin: 0 auto 12px;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3d7a77, #B2DFDB, #b8934a);
+  border-radius: 2px;
+  transition: width 0.12s ease;
+  box-shadow: 0 0 10px rgba(178,223,219,0.5);
+}
+.loader-pct {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  font-family: monospace;
+}
+/* Floating dots */
+.loader-inner::before,
+.loader-inner::after {
+  content: '✦';
+  position: absolute;
+  color: rgba(184,147,74,0.3);
+  font-size: 10px;
+  animation: floatDot 3s ease-in-out infinite;
+}
+.loader-inner::before { top: -30px; right: -40px; animation-delay: 0s; }
+.loader-inner::after  { bottom: -20px; left: -50px; animation-delay: 1.5s; }
+@keyframes floatDot {
+  0%,100% { transform: translateY(0); opacity: 0.3; }
+  50%      { transform: translateY(-8px); opacity: 0.7; }
+}
+.loader-wave {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  line-height: 0;
+  animation: waveMove 4s ease-in-out infinite alternate;
+}
+.loader-wave svg { width: 100%; display: block; }
+@keyframes waveMove {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-3%); }
+}
+</style>
+
+<script>
+(function(){
+  const loader = document.getElementById('loader');
+  const bar    = document.querySelector('.loader-bar');
+  const pct    = document.getElementById('loader-pct');
+  let progress = 0;
+  let pageLoaded = false;
+  let heroLoaded = false;
+
+  const tick = setInterval(() => {
+    const target = Math.min(85, (performance.now() / 18));
+    progress = Math.min(target, 85);
+    bar.style.width = progress + '%';
+    pct.textContent = Math.floor(progress) + '%';
+  }, 30);
+
+  function tryFinish() {
+    if (!pageLoaded || !heroLoaded) return;
+    clearInterval(tick);
+    bar.style.width = '100%';
+    bar.style.transition = 'width 0.3s ease';
+    pct.textContent = '100%';
+    setTimeout(() => loader.classList.add('hidden'), 450);
+  }
+
+  // Wait for full page load
+  if (document.readyState === 'complete') {
+    pageLoaded = true;
+  } else {
+    window.addEventListener('load', () => { pageLoaded = true; tryFinish(); });
+  }
+
+  // Extract hero background base64 and preload it as an Image object
+  window.addEventListener('DOMContentLoaded', () => {
+    const hero = document.querySelector('.hero');
+    if (!hero) { heroLoaded = true; tryFinish(); return; }
+
+    const style = getComputedStyle(hero).backgroundImage;
+    // If it's a data URI or URL, create an img to check load
+    const match = style.match(/url\(["']?(.*?)["']?\)/);
+    if (!match) { heroLoaded = true; tryFinish(); return; }
+
+    const src = match[1];
+    if (src.startsWith('data:')) {
+      // base64 — browser already has it in memory after parse; give it one frame
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => { heroLoaded = true; tryFinish(); });
+      });
+    } else {
+      const img = new Image();
+      img.onload = img.onerror = () => { heroLoaded = true; tryFinish(); };
+      img.src = src;
+    }
+  });
+
+  // Hard fallback: max 6s no matter what
+  setTimeout(() => { pageLoaded = true; heroLoaded = true; tryFinish(); }, 6000);
+})();
+</script>
+
 <!-- SCROLL PROGRESS -->
 <div id="scroll-progress"></div>
 
@@ -971,7 +1175,7 @@
     <li><a href="#premium-faq">الأسئلة الشائعة</a></li>
     <li><a href="#guidelines">الإرشادات</a></li>
     <li><a href="#location-sec">الموقع</a></li>
-    <li><a href="#pricing" onclick="setTimeout(()=>document.querySelector('[onclick*=openBooking]').click(),400)">احجز الآن</a></li>
+
     <li><a href="#contact">تواصل معنا</a></li>
   </ul>
 </nav>
@@ -1032,38 +1236,38 @@
   <div class="features-wrap">
     <div class="fade-in">
       
-      <h2 class="section-title">كل اللي تحتاجه في<br><span>إجازة مثالية</span></h2>
+      <h2 class="section-title">كل اللي تحتاجه في <span>إجازة مثالية</span></h2>
       <p class="section-body">شاليهاتنا مجهزة بأعلى معايير الراحة والرفاهية لتضمن لك وعيلتك أجمل وقت على شاطئ مطروح.</p>
     </div>
 
     <div class="features-grid">
       <div class="feature-card fade-in">
-        <span class="feature-icon">🏖️</span>
+        <div class="feature-marker"></div>
         <div class="feature-title">شاطئ خاص مميز</div>
         <div class="feature-desc">شاطئ نظيف ومميز على البحر المتوسط مباشرة مع باصات نقل مجانية كل ساعة</div>
       </div>
       <div class="feature-card fade-in">
-        <span class="feature-icon">🏊</span>
+        <div class="feature-marker"></div>
         <div class="feature-title">أكثر من ١٥ حمام سباحة</div>
         <div class="feature-desc">حمامات سباحة موزعة بذكاء بين الشاليهات مع إطلالة على المياه الزرقاء</div>
       </div>
       <div class="feature-card fade-in">
-        <span class="feature-icon">❄️</span>
+        <div class="feature-marker"></div>
         <div class="feature-title">تكييف بالكامل</div>
         <div class="feature-desc">شاليهات مكيفة بالكامل لضمان راحتك في أشد أيام الصيف حرارة</div>
       </div>
       <div class="feature-card fade-in">
-        <span class="feature-icon">🍳</span>
+        <div class="feature-marker"></div>
         <div class="feature-title">مطبخ مجهز بالكامل</div>
         <div class="feature-desc">تلاجة، بوتجاز، ميكرويف، غسالة أوتوماتيك، وكل الأدوات اللازمة</div>
       </div>
       <div class="feature-card fade-in">
-        <span class="feature-icon">📺</span>
+        <div class="feature-marker"></div>
         <div class="feature-title">ترفيه متكامل</div>
         <div class="feature-desc">شاشة تلفزيون مسطحة وألعاب مائية متنوعة تناسب جميع الأعمار</div>
       </div>
       <div class="feature-card fade-in">
-        <span class="feature-icon">🛡️</span>
+        <div class="feature-marker"></div>
         <div class="feature-title">أمان وخصوصية</div>
         <div class="feature-desc">منتجع مسوّر مع حراسة على مدار الساعة وخدمات متكاملة لراحة بالك</div>
       </div>
@@ -1452,7 +1656,17 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft') changeSlide(-1);
     if (e.key === 'ArrowRight') changeSlide(1);
-    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'Escape') {
+      closeLightbox();
+      closeBooking();
+      const gn = document.getElementById('guidelines-notif');
+      if (gn && gn.style.display === 'flex') {
+        gn.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+      document.getElementById('hamburger')?.classList.remove('open');
+      document.getElementById('nav-links')?.classList.remove('open');
+    }
   });
 
   // Lightbox on click
@@ -1503,9 +1717,12 @@
       navigator.share(shareData);
     } else {
       navigator.clipboard.writeText(window.location.href).then(() => {
-        const btn = document.getElementById('share-btn');
-        btn.textContent = '✅ تم النسخ!';
-        setTimeout(() => btn.innerHTML = '🔗 شارك الموقع', 2000);
+        const btn = document.querySelector('[onclick*="shareWebsite"]');
+        if (btn) {
+          const orig = btn.innerHTML;
+          btn.textContent = '✅ تم النسخ!';
+          setTimeout(() => btn.innerHTML = orig, 2000);
+        }
       });
     }
   }
@@ -1521,24 +1738,39 @@
       navLinks.classList.remove('open');
     });
   });
-  // Scroll animation - elements in view show immediately, others animate on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  // Smooth staggered scroll animations — runs AFTER loader hides
+  function initFadeObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.98) {
+        // in view right now — stagger reveal
+        setTimeout(() => el.classList.add('visible'), i * 35);
+      } else {
+        observer.observe(el);
       }
     });
-  }, { threshold: 0.08 });
+  }
 
-  document.querySelectorAll('.fade-in').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
-      el.classList.add('visible'); // already in view — show immediately
-    } else {
-      observer.observe(el); // below fold — animate on scroll
-    }
-  });
+  // Wait for loader to finish before initialising animations
+  const loaderEl = document.getElementById('loader');
+  if (loaderEl) {
+    loaderEl.addEventListener('transitionend', () => {
+      if (loaderEl.classList.contains('hidden')) initFadeObserver();
+    });
+    // Fallback in case transition doesn't fire
+    setTimeout(initFadeObserver, 2000);
+  } else {
+    initFadeObserver();
+  }
 
   // Counter animation
   function animateCounter(el, target, duration = 1500, suffix = '') {
@@ -1561,28 +1793,76 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
 
-  // Smooth scroll
+  // Smooth scroll with nav offset
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        // Close menu first, then scroll after menu animation finishes
+        const hbg = document.getElementById('hamburger');
+        const nl  = document.getElementById('nav-links');
+        const wasOpen = nl?.classList.contains('open');
+        hbg?.classList.remove('open');
+        nl?.classList.remove('open');
+
+        const doScroll = () => {
+          const navH = document.querySelector('nav')?.offsetHeight || 70;
+          const top  = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+          window.scrollTo({ top, behavior: 'smooth' });
+        };
+
+        // If menu was open, wait for it to close (300ms transition) before scrolling
+        if (wasOpen) {
+          setTimeout(doScroll, 320);
+        } else {
+          doScroll();
+        }
+      }
     });
   });
 
+  // Active nav link highlight on scroll
+  const _navSections = ['features','gallery','pricing','reviews-sec','premium-faq','guidelines','location-sec','contact'];
+  const _navLinks = document.querySelectorAll('.nav-links a');
+  function _updateActiveNav() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let active = '';
+    _navSections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= mid) active = id;
+    });
+    _navLinks.forEach(a => {
+      const match = a.getAttribute('href') === '#' + active;
+      a.style.color = match ? 'var(--gold)' : '';
+      a.style.fontWeight = match ? '700' : '';
+    });
+  }
+  window.addEventListener('scroll', _updateActiveNav, { passive: true });
+  _updateActiveNav();
+
   // Scroll progress bar
   const progressBar = document.getElementById('scroll-progress');
+  const navEl = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+    // Nav gets slightly more opaque when scrolled
+    if (navEl) {
+      navEl.style.background = scrollTop > 60
+        ? 'rgba(10,26,24,0.85)'
+        : 'rgba(255,255,255,0.06)';
+    }
   }, { passive: true });
 </script>
 
 <!-- PREMIUM UPGRADE START -->
 <style>
 :root{--p1:#1a3533;--p2:#2D5F5D;--p3:#3d7a77;--p4:#B2DFDB;--p5:#b8934a;--p6:#F5F1E8}
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
 body{overscroll-behavior-y:none}
 
 
@@ -1821,10 +2101,7 @@ linear-gradient(160deg,#0f2220 0%, #1a3533 35%, #2D5F5D 70%, #3d7a77 100%)}
       </div>
     </div>
 
-    <div class="cta-contact fade-in">
-      <p class="cta-contact-text">جاهز تحجز؟ تواصل معنا الآن مباشرة</p>
-      <a class="pbtn primary" href="https://wa.me/201015753775?text=مرحبا،%20عايز%20احجز%20شاليه%20في%20بورتو%20مطروح" target="_blank" rel="noopener">احجز واتساب الآن</a>
-    </div>
+
   </div>
 </section>
 
@@ -1865,52 +2142,52 @@ linear-gradient(160deg,#0f2220 0%, #1a3533 35%, #2D5F5D 70%, #3d7a77 100%)}
 </style>
 <style>
 #location-sec {
-  background: linear-gradient(180deg, #0d1f1d 0%, #1a3533 100%);
-  padding: 80px 20px !important;
+  background: #07161a;
+  padding: 100px 20px !important;
   max-width: 100% !important;
   margin: 0 !important;
 }
-#location-sec .loc-inner { max-width: 1200px; margin: 0 auto; }
-#location-sec .loc-head { text-align: center; margin-bottom: 52px; }
+#location-sec .loc-inner { max-width: 1100px; margin: 0 auto; }
+#location-sec .loc-head { text-align: center; margin-bottom: 56px; }
 #location-sec .loc-tag {
-  color: #B2DFDB; font-size: 12px; font-weight: 800;
-  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px;
+  color: var(--turq); font-size: 11px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 14px; opacity: 0.8;
 }
 #location-sec .loc-title {
   font-family: 'Amiri', serif;
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(28px, 4vw, 46px);
   font-weight: 700; color: #fff; margin: 0 0 12px;
 }
-#location-sec .loc-title span { color: #b8934a; }
-#location-sec .loc-sub { color: rgba(255,255,255,.6); font-size: 16px; margin: 0; }
+#location-sec .loc-title span { color: var(--gold); }
+#location-sec .loc-sub { color: rgba(255,255,255,.38); font-size: 15px; margin: 0; }
 
 /* distances row */
 #location-sec .loc-distances {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 16px;
+  overflow: hidden;
   margin-bottom: 40px;
 }
 #location-sec .dist-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(178,223,219,0.15);
-  border-radius: 18px;
-  padding: 20px 16px;
+  background: #07161a;
+  padding: 24px 16px;
   text-align: center;
-  transition: background .25s, border-color .25s, transform .25s;
+  transition: background .25s;
 }
 #location-sec .dist-card:hover {
-  background: rgba(178,223,219,0.09);
-  border-color: rgba(178,223,219,0.35);
-  transform: translateY(-3px);
+  background: rgba(255,255,255,0.03);
+  transform: none;
 }
-#location-sec .dist-icon { font-size: 28px; margin-bottom: 10px; display: block; }
-#location-sec .dist-from { font-size: 13px; font-weight: 800; color: #B2DFDB; margin-bottom: 6px; }
+#location-sec .dist-icon { display: none; }
+#location-sec .dist-from { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); margin-bottom: 8px; letter-spacing: 0.5px; }
 #location-sec .dist-km {
   font-family: 'Amiri', serif;
-  font-size: 26px; font-weight: 700; color: #F1E4C0; line-height: 1;
+  font-size: 28px; font-weight: 700; color: #fff; line-height: 1;
 }
-#location-sec .dist-time { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 4px; }
+#location-sec .dist-time { font-size: 12px; color: rgba(184,147,74,0.7); margin-top: 6px; }
 
 /* main grid */
 #location-sec .loc-grid {
@@ -1919,37 +2196,39 @@ linear-gradient(160deg,#0f2220 0%, #1a3533 35%, #2D5F5D 70%, #3d7a77 100%)}
   gap: 32px;
   align-items: start;
 }
-#location-sec .loc-pins { display: flex; flex-direction: column; gap: 14px; }
+#location-sec .loc-pins { display: flex; flex-direction: column; gap: 0; }
 #location-sec .loc-pin {
-  display: flex; align-items: flex-start; gap: 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(178,223,219,0.15);
-  border-radius: 16px; padding: 18px 20px;
-  transition: background .25s, border-color .25s;
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.055);
+  transition: none;
+  background: none;
+  border-radius: 0;
+  border-left: none; border-right: none; border-top: none;
 }
-#location-sec .loc-pin:hover {
-  background: rgba(178,223,219,0.08);
-  border-color: rgba(178,223,219,0.35);
+#location-sec .loc-pin:first-child { border-top: 1px solid rgba(255,255,255,0.055); }
+#location-sec .loc-pin:hover { background: none; border-color: rgba(255,255,255,0.055); }
+#location-sec .loc-pin-icon {
+  font-size: 13px; flex-shrink: 0; margin-top: 3px;
+  color: rgba(184,147,74,0.5); font-weight: 400;
 }
-#location-sec .loc-pin-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-#location-sec .loc-pin-title { font-size: 14px; font-weight: 800; color: #B2DFDB; margin-bottom: 4px; }
-#location-sec .loc-pin-text { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.7; margin: 0; }
+#location-sec .loc-pin-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+#location-sec .loc-pin-text { font-size: 14px; color: rgba(255,255,255,.82); line-height: 1.7; margin: 0; }
 
-/* map wrapper — clickable link */
+/* map wrapper */
 #location-sec .loc-map-wrap {
   display: block;
   position: relative;
-  height: 440px;
-  border-radius: 22px;
+  height: 420px;
+  border-radius: 16px;
   overflow: hidden;
-  border: 2px solid rgba(178,223,219,0.2);
-  box-shadow: 0 12px 40px rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,0.08);
   text-decoration: none;
   cursor: pointer;
 }
 #location-sec .loc-map-wrap iframe {
   width: 100%; height: 100%; border: 0; display: block;
-  pointer-events: none; /* clicks go to the <a> wrapper */
+  pointer-events: none;
 }
 #location-sec .loc-map-overlay {
   position: absolute;
@@ -2007,25 +2286,25 @@ linear-gradient(160deg,#0f2220 0%, #1a3533 35%, #2D5F5D 70%, #3d7a77 100%)}
     <!-- distances -->
     <div class="loc-distances fade-in">
       <div class="dist-card">
-        <span class="dist-icon">🚗</span>
+        
         <div class="dist-from">من القاهرة</div>
         <div class="dist-km">٥١٠ كم</div>
         <div class="dist-time">≈ ٥ ساعات</div>
       </div>
       <div class="dist-card">
-        <span class="dist-icon">🚗</span>
+        
         <div class="dist-from">من الإسكندرية</div>
         <div class="dist-km">٢٩٠ كم</div>
         <div class="dist-time">≈ ٣ ساعات</div>
       </div>
       <div class="dist-card">
-        <span class="dist-icon">🚗</span>
+        
         <div class="dist-from">من العلمين</div>
         <div class="dist-km">١٧٠ كم</div>
         <div class="dist-time">≈ ١.٥ ساعة</div>
       </div>
       <div class="dist-card">
-        <span class="dist-icon">🏖️</span>
+        
         <div class="dist-from">من الشاليه للبحر</div>
         <div class="dist-km">٥ دقائق</div>
         <div class="dist-time">مشياً على الأقدام</div>
@@ -2035,28 +2314,28 @@ linear-gradient(160deg,#0f2220 0%, #1a3533 35%, #2D5F5D 70%, #3d7a77 100%)}
     <div class="loc-grid">
       <div class="loc-pins">
         <div class="loc-pin fade-in">
-          <div class="loc-pin-icon">📍</div>
+          <div class="loc-pin-icon">—</div>
           <div>
             <div class="loc-pin-title">العنوان</div>
             <p class="loc-pin-text">بورتو مطروح — مرسى مطروح، الساحل الشمالي الغربي، مصر</p>
           </div>
         </div>
         <div class="loc-pin fade-in">
-          <div class="loc-pin-icon">🛣️</div>
+          <div class="loc-pin-icon">—</div>
           <div>
             <div class="loc-pin-title">الطريق</div>
             <p class="loc-pin-text">طريق القاهرة–الإسكندرية الصحراوي ثم الساحلي — طريق ممتاز ومريح طول الرحلة</p>
           </div>
         </div>
         <div class="loc-pin fade-in">
-          <div class="loc-pin-icon">🛒</div>
+          <div class="loc-pin-icon">—</div>
           <div>
             <div class="loc-pin-title">الخدمات المحيطة</div>
             <p class="loc-pin-text">سوبرماركت، مطاعم، صيدليات — كل حاجة على بُعد دقائق</p>
           </div>
         </div>
         <div class="loc-pin fade-in">
-          <div class="loc-pin-icon">🅿️</div>
+          <div class="loc-pin-icon">—</div>
           <div>
             <div class="loc-pin-title">موقف سيارات</div>
             <p class="loc-pin-text">موقف خاص ومجاني لجميع ضيوف الشاليهات — بدون أي رسوم</p>
@@ -2078,7 +2357,7 @@ linear-gradient(160deg,#0f2220 0%, #1a3533 35%, #2D5F5D 70%, #3d7a77 100%)}
         </iframe>
         <div class="loc-map-overlay">
           <div class="loc-map-btn">
-            📍 افتح في جوجل مابس
+            افتح في جوجل مابس ↗
           </div>
         </div>
       </a>
@@ -2089,65 +2368,65 @@ linear-gradient(160deg,#0f2220 0%, #1a3533 35%, #2D5F5D 70%, #3d7a77 100%)}
 <!-- ===== REVIEWS SECTION ===== -->
 <style>
 #reviews-sec {
-  background: linear-gradient(180deg, #0f2321 0%, #1a3533 100%);
-  padding: 80px 20px !important;
+  background: #07161a;
+  padding: 100px 20px !important;
   max-width: 100% !important;
   margin: 0 !important;
 }
-#reviews-sec .rev-inner { max-width: 1200px; margin: 0 auto; }
+#reviews-sec .rev-inner { max-width: 1100px; margin: 0 auto; }
 #reviews-sec .rev-head { text-align: center; margin-bottom: 20px; }
 #reviews-sec .rev-tag {
-  color: #B2DFDB; font-size: 12px; font-weight: 800;
-  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px;
+  color: var(--turq); font-size: 11px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 14px; opacity: 0.8;
 }
 #reviews-sec .rev-title {
   font-family: 'Amiri', serif;
   font-size: clamp(26px, 4vw, 44px);
   font-weight: 700; color: #fff; margin: 0 0 10px;
 }
-#reviews-sec .rev-title span { color: #b8934a; }
+#reviews-sec .rev-title span { color: var(--gold); }
 #reviews-sec .rev-summary {
   display: flex; align-items: center; justify-content: center;
-  gap: 12px; margin-bottom: 48px;
+  gap: 12px; margin-bottom: 52px;
 }
 #reviews-sec .rev-score {
   font-family: 'Amiri', serif;
   font-size: 52px; font-weight: 700;
-  color: #b8934a; line-height: 1;
+  color: var(--gold); line-height: 1;
 }
-#reviews-sec .rev-stars { font-size: 22px; color: #f5c518; letter-spacing: 2px; }
-#reviews-sec .rev-count { font-size: 14px; color: rgba(255,255,255,.5); margin-top: 4px; }
+#reviews-sec .rev-stars { font-size: 18px; color: var(--gold); letter-spacing: 3px; opacity: 0.8; }
+#reviews-sec .rev-count { font-size: 13px; color: rgba(255,255,255,.35); margin-top: 4px; }
 
 /* Carousel */
 #reviews-sec .rev-carousel {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 16px;
 }
 #reviews-sec .rev-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(178,223,219,0.12);
-  border-radius: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
   padding: 24px 22px;
-  transition: border-color .3s, transform .3s, background .3s;
+  transition: border-color .3s, background .3s;
   display: flex; flex-direction: column; gap: 14px;
 }
 #reviews-sec .rev-card:hover {
-  border-color: rgba(184,147,74,0.35);
-  background: rgba(255,255,255,0.07);
-  transform: translateY(-4px);
+  border-color: rgba(184,147,74,0.2);
+  background: rgba(255,255,255,0.05);
+  transform: none;
 }
 #reviews-sec .rev-card-top {
   display: flex; align-items: center; gap: 12px;
 }
 #reviews-sec .rev-avatar {
-  width: 44px; height: 44px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 800; color: #1a3533;
+  font-size: 16px; font-weight: 700; color: #1a3533;
   flex-shrink: 0; font-family: 'Tajawal', sans-serif;
 }
 #reviews-sec .rev-name {
-  font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px;
+  font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px;
 }
 #reviews-sec .rev-date { font-size: 12px; color: rgba(255,255,255,.4); }
 #reviews-sec .rev-stars-sm { font-size: 14px; color: #f5c518; letter-spacing: 1px; }
@@ -2782,7 +3061,7 @@ function initStars(canvasId) {
   draw();
 }
 
-initStars('starsCanvas2');
+// initStars removed — canvas element not present
 </script>
 
 <script>
@@ -2827,9 +3106,15 @@ function switchGuideTab(btn, panelId) {
           <input id="b-nights" type="number" min="1" max="30" placeholder="٣" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='var(--turq)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
         </div>
       </div>
-      <div>
-        <label style="color:rgba(255,255,255,0.7);font-size:13px;display:block;margin-bottom:6px;">عدد الأفراد</label>
-        <input id="b-guests" type="number" min="1" max="10" placeholder="٤" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='var(--turq)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="color:rgba(255,255,255,0.7);font-size:13px;display:block;margin-bottom:6px;">عدد الأفراد</label>
+          <input id="b-guests" type="number" min="1" max="20" placeholder="٤" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='var(--turq)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        </div>
+        <div>
+          <label style="color:rgba(255,255,255,0.7);font-size:13px;display:block;margin-bottom:6px;">عدد الأطفال</label>
+          <input id="b-children" type="number" min="0" max="15" placeholder="٠" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='var(--turq)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+        </div>
       </div>
     </div>
 
@@ -2891,13 +3176,12 @@ function switchGuideTab(btn, panelId) {
   // ===== BOOKING MODAL =====
   let _bookingData = {};
 
-  function openBooking(type, name, price) {
-    _bookingData = { type, name, price };
-    document.getElementById('modal-title').textContent = name;
-    document.getElementById('modal-type').textContent = type;
-    document.getElementById('modal-price').textContent = price;
-    // clear fields
-    ['b-name','b-phone','b-checkin','b-nights','b-guests'].forEach(id => document.getElementById(id).value = '');
+  function openBooking(type, chaletName, price) {
+    _bookingData = { type: type||'', chaletName: chaletName||'', price: price||'' };
+    document.getElementById('modal-title').textContent = chaletName || 'احجز شاليهك';
+    document.getElementById('modal-type').textContent  = type  || 'اختر من قائمة الأسعار';
+    document.getElementById('modal-price').textContent = price || '—';
+    ['b-name','b-phone','b-checkin','b-nights','b-guests','b-children'].forEach(id => document.getElementById(id).value = '');
     const m = document.getElementById('booking-modal');
     m.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -2913,19 +3197,20 @@ function switchGuideTab(btn, panelId) {
     const phone   = document.getElementById('b-phone').value.trim();
     const checkin = document.getElementById('b-checkin').value;
     const nights  = document.getElementById('b-nights').value.trim();
-    const guests  = document.getElementById('b-guests').value.trim();
+    const guests   = document.getElementById('b-guests').value.trim();
+    const children = document.getElementById('b-children').value.trim();
 
     if (!name || !phone || !checkin || !nights) {
       alert('من فضلك اكمل الحقول المطلوبة (*)');
       return;
     }
 
-    // Save for WhatsApp send
-    _bookingData.name    = name;
-    _bookingData.phone   = phone;
-    _bookingData.checkin = checkin;
-    _bookingData.nights  = nights;
-    _bookingData.guests  = guests || 'غير محدد';
+    _bookingData.customerName = name;
+    _bookingData.phone    = phone;
+    _bookingData.checkin  = checkin;
+    _bookingData.nights   = nights;
+    _bookingData.guests   = guests || 'غير محدد';
+    _bookingData.children = children || '٠';
 
     // Close form, show guidelines
     closeBooking();
@@ -2941,23 +3226,25 @@ function switchGuideTab(btn, panelId) {
     const m = document.getElementById('booking-modal');
     m.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    document.getElementById('b-name').value    = _bookingData.name;
+    document.getElementById('b-name').value    = _bookingData.customerName || '';
     document.getElementById('b-phone').value   = _bookingData.phone;
     document.getElementById('b-checkin').value = _bookingData.checkin;
     document.getElementById('b-nights').value  = _bookingData.nights;
-    document.getElementById('b-guests').value  = _bookingData.guests !== 'غير محدد' ? _bookingData.guests : '';
+    document.getElementById('b-guests').value    = _bookingData.guests !== 'غير محدد' ? _bookingData.guests : '';
+    document.getElementById('b-children').value  = _bookingData.children !== '٠' ? _bookingData.children : '';
   }
 
   function agreeAndSend() {
     const d = _bookingData;
     const msg = `🏖️ *طلب حجز جديد — شاليهات هشام العبد*\n\n` +
-      `👤 *الاسم:* ${d.name}\n` +
+      `👤 *الاسم:* ${d.customerName}\n` +
       `📞 *الموبايل:* ${d.phone}\n` +
-      `🏠 *نوع الشاليه:* ${d.name} (${d.type})\n` +
+      `🏠 *نوع الشاليه:* ${d.chaletName} (${d.type})\n` +
       `💰 *السعر:* ${d.price} جنيه/ليلة\n` +
       `📅 *تاريخ الوصول:* ${d.checkin}\n` +
       `🌙 *عدد الليالي:* ${d.nights}\n` +
-      `👥 *عدد الأفراد:* ${d.guests}\n\n` +
+      `👥 *عدد الأفراد:* ${d.guests}\n` +
+      `👶 *عدد الأطفال:* ${d.children}\n\n` +
       `✅ *وافق العميل على جميع الشروط والإرشادات*`;
 
     const url = `https://wa.me/201015753775?text=${encodeURIComponent(msg)}`;
