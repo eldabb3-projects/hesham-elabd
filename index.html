@@ -1204,7 +1204,7 @@ body:has(#loader:not(.hidden)) {
   </p>
 
   <div class="hero-cta">
-    <a href="https://wa.me/201015753775" target="_blank" class="btn-primary">احجز الآن</a>
+    <a onclick="openBooking('', 'احجز شاليهك', '')" class="btn-primary" style="cursor:pointer;">احجز الآن</a>
     <a href="#pricing" class="btn-secondary">الأسعار والتفاصيل</a>
   </div>
 
@@ -1582,6 +1582,234 @@ body:has(#loader:not(.hidden)) {
   </div>
 </div>
 
+
+<!-- ===== PREMIUM CHALETS SECTION ===== -->
+<style>
+  .prem-slider-wrap { overflow:hidden; position:relative; }
+  .prem-track { display:flex; transition:transform 0.45s cubic-bezier(.4,0,.2,1); will-change:transform; }
+  .prem-slide { min-width:100%; box-sizing:border-box; padding:0 8px; }
+  .prem-card {
+    border-radius:28px; padding:44px 36px; position:relative; overflow:hidden;
+    min-height:380px; display:flex; flex-direction:column; justify-content:space-between;
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  }
+  .prem-card-top-line { position:absolute;top:0;left:0;right:0;height:2px; border-radius:28px 28px 0 0; }
+  .prem-dot-btn {
+    width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(255,255,255,0.2);transition:all 0.25s;padding:0;
+  }
+  .prem-dot-btn.active { background:var(--gold); transform:scale(1.3); }
+  .prem-arrow {
+    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+    color:white;width:44px;height:44px;border-radius:50%;font-size:20px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all 0.2s;flex-shrink:0;
+  }
+  .prem-arrow:hover { background:rgba(184,147,74,0.25);border-color:var(--gold); }
+</style>
+
+<div id="premium-chalets" style="background:linear-gradient(180deg,#07161a 0%,#0a1f1c 100%);padding:100px 0 80px;">
+  <div style="max-width:860px;margin:0 auto;padding:0 20px;">
+
+    <div class="fade-in" style="text-align:center;margin-bottom:50px;">
+      <div style="font-size:12px;letter-spacing:4px;color:var(--gold);font-weight:700;margin-bottom:14px;">✦ الوحدات الكبيرة</div>
+      <h2 class="section-title" style="margin-bottom:16px;">شاليهات <span>العائلات الكبيرة</span></h2>
+      <p class="section-body" style="margin:0 auto;">مساحات أوسع، خصوصية أعلى، وتجربة على مستوى مختلف</p>
+    </div>
+
+    <!-- Slider -->
+    <div class="prem-slider-wrap" id="premSliderWrap">
+      <div class="prem-track" id="premTrack">
+
+        <!-- كارت 1: شاليه عائلي - 2 غرفة -->
+        <div class="prem-slide">
+          <div class="prem-card" style="background:rgba(61,122,119,0.14);border:1px solid rgba(90,158,155,0.28);">
+            <div class="prem-card-top-line" style="background:linear-gradient(90deg,transparent,var(--turq),transparent);"></div>
+            <div>
+              <div style="font-size:12px;color:var(--turq);letter-spacing:3px;margin-bottom:10px;">٢ غرفة — جاردن</div>
+              <h3 style="font-family:'Amiri',serif;font-size:30px;color:white;margin:0 0 12px;">شاليه عائلي</h3>
+              <p style="color:rgba(255,255,255,0.6);font-size:14px;line-height:1.8;margin:0 0 20px;">مناسب لعائلة صغيرة، مطبخ مجهز، جاردن خاص، وسعر تنافسي.</p>
+              <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:9px;">
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--turq);">✦</span> مطبخ مجهز بالكامل</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--turq);">✦</span> جاردن خاص</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--turq);">✦</span> مناسب لـ ٧+ أفراد</li>
+              </ul>
+            </div>
+            <div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px;text-align:center;">
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:4px;">شهر ٦</div>
+                  <div style="font-size:22px;font-weight:800;color:var(--turq);">٣٥٠٠</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);">جنيه/ليلة</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px;text-align:center;">
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:4px;">شهر ٧ و٨</div>
+                  <div style="font-size:22px;font-weight:800;color:var(--gold);">٦٠٠٠</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);">جنيه/ليلة</div>
+                </div>
+              </div>
+              <a onclick="openBooking('٢ غرفة — جاردن', 'شاليه عائلي', '')" style="display:block;text-align:center;padding:13px;background:rgba(90,158,155,0.2);border:1px solid rgba(90,158,155,0.45);border-radius:12px;color:var(--turq);font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;">احجز الآن</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- كارت 2: شاليه فاخر - 3 غرف جاردن -->
+        <div class="prem-slide">
+          <div class="prem-card" style="background:rgba(184,147,74,0.08);border:1.5px solid rgba(184,147,74,0.32);">
+            <div class="prem-card-top-line" style="background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
+            <div style="position:absolute;top:20px;left:20px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-size:11px;font-weight:700;padding:4px 14px;border-radius:50px;">الأكثر طلباً</div>
+            <div style="margin-top:16px;">
+              <div style="font-size:12px;color:var(--gold);letter-spacing:3px;margin-bottom:10px;">٣ غرف — جاردن</div>
+              <h3 style="font-family:'Amiri',serif;font-size:30px;color:white;margin:0 0 12px;">شاليه فاخر</h3>
+              <p style="color:rgba(255,255,255,0.6);font-size:14px;line-height:1.8;margin:0 0 20px;">مناسب للعائلات الكبيرة، مساحة أوسع، وتجربة أكثر خصوصية.</p>
+              <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:9px;">
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> مساحة أوسع وخصوصية أعلى</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> مناسب لـ ٨+ أفراد</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> تجهيزات متكاملة</li>
+              </ul>
+            </div>
+            <div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px;text-align:center;">
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:4px;">شهر ٦</div>
+                  <div style="font-size:22px;font-weight:800;color:var(--turq);">٥٠٠٠</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);">جنيه/ليلة</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px;text-align:center;">
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:4px;">شهر ٧ و٨</div>
+                  <div style="font-size:22px;font-weight:800;color:var(--gold);">٨٥٠٠</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.4);">جنيه/ليلة</div>
+                </div>
+              </div>
+              <a onclick="openBooking('٣ غرف — جاردن', 'شاليه فاخر', '')" style="display:block;text-align:center;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;border-radius:12px;">احجز الآن</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- كارت 3: شاليه VIP - 4 غرف -->
+        <div class="prem-slide">
+          <div class="prem-card" style="background:rgba(184,147,74,0.06);border:1.5px solid rgba(184,147,74,0.5);box-shadow:0 0 50px rgba(184,147,74,0.08);">
+            <div class="prem-card-top-line" style="background:linear-gradient(90deg,transparent,var(--gold),var(--gold-light),var(--gold),transparent);"></div>
+            <div style="position:absolute;top:20px;left:20px;background:rgba(184,147,74,0.15);border:1px solid rgba(184,147,74,0.4);color:var(--gold);font-size:11px;font-weight:700;padding:4px 14px;border-radius:50px;letter-spacing:1px;">VIP حصري</div>
+            <div style="margin-top:16px;">
+              <div style="font-size:12px;color:var(--gold-light);letter-spacing:3px;margin-bottom:10px;">٤ غرف</div>
+              <h3 style="font-family:'Amiri',serif;font-size:30px;color:white;margin:0 0 12px;">شاليه VIP</h3>
+              <p style="color:rgba(255,255,255,0.6);font-size:14px;line-height:1.8;margin:0 0 20px;">الشاليه الوحيد في القرية بتشطيب فاخر على أعلى مستوى، خامات ممتازة وتفاصيل داخلية متقنة.</p>
+              <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:9px;">
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> تشطيب فاخر لا مثيل له في القرية</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> خصوصية تامة ومساحة ملكية</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> مناسب لـ ١٠+ أفراد</li>
+              </ul>
+            </div>
+            <div>
+              <div style="background:rgba(184,147,74,0.08);border:1px solid rgba(184,147,74,0.2);border-radius:12px;padding:14px;text-align:center;margin-bottom:16px;">
+                <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:4px;">للسعر تواصل معنا مباشرةً</div>
+              </div>
+              <a href="https://wa.me/201015753775?text=مرحبا،%20عايز%20أعرف%20سعر%20شاليه%20VIP" target="_blank" style="display:block;text-align:center;padding:13px;background:linear-gradient(135deg,#25D366,#1aab52);color:white;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;border-radius:12px;text-decoration:none;">💬 استفسر على واتساب</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- كارت 4: شاليه ليفل الوحش -->
+        <div class="prem-slide">
+          <div class="prem-card" style="background:rgba(60,20,120,0.25);border:1.5px solid rgba(150,100,255,0.3);box-shadow:0 0 50px rgba(120,60,220,0.08);">
+            <div class="prem-card-top-line" style="background:linear-gradient(90deg,transparent,#a066ff,transparent);"></div>
+            <div style="position:absolute;top:20px;left:20px;background:rgba(150,100,255,0.15);border:1px solid rgba(150,100,255,0.4);color:#c89fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:50px;">🔥 ليفل الوحش</div>
+            <div style="margin-top:16px;">
+              <div style="font-size:12px;color:#c89fff;letter-spacing:3px;margin-bottom:10px;">٣ غرف — دور علوي</div>
+              <h3 style="font-family:'Amiri',serif;font-size:30px;color:white;margin:0 0 12px;">شاليه ليفل الوحش</h3>
+              <p style="color:rgba(255,255,255,0.6);font-size:14px;line-height:1.8;margin:0 0 20px;">مش VIP وعدى مرحلة VIP بكتير — دور علوي تاني خالص بمساحة ومنظر ما إلهومش حل.</p>
+              <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:9px;">
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:#c89fff;">✦</span> ٣ غرف نوم — دور علوي</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:#c89fff;">✦</span> مساحة وإطلالة استثنائية</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:#c89fff;">✦</span> تشطيب على مستوى مختلف تماماً</li>
+                <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:#c89fff;">✦</span> مناسب لـ ٨+ أفراد</li>
+              </ul>
+            </div>
+            <div>
+              <div style="background:rgba(150,100,255,0.06);border:1px solid rgba(150,100,255,0.2);border-radius:12px;padding:14px;text-align:center;margin-bottom:16px;">
+                <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:4px;">للسعر تواصل معنا مباشرةً</div>
+              </div>
+              <a href="https://wa.me/201015753775?text=مرحبا،%20عايز%20أعرف%20سعر%20شاليه%20ليفل%20الوحش" target="_blank" style="display:block;text-align:center;padding:13px;background:linear-gradient(135deg,#25D366,#1aab52);color:white;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;border-radius:12px;text-decoration:none;">💬 استفسر على واتساب</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end prem-track -->
+    </div><!-- end prem-slider-wrap -->
+
+    <!-- Controls -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:28px;">
+      <button class="prem-arrow" onclick="premGo(premCurrent+1)">&#8250;</button>
+      <div style="display:flex;gap:8px;" id="premDots">
+        <button class="prem-dot-btn active" onclick="premGo(0)"></button>
+        <button class="prem-dot-btn" onclick="premGo(1)"></button>
+        <button class="prem-dot-btn" onclick="premGo(2)"></button>
+        <button class="prem-dot-btn" onclick="premGo(3)"></button>
+      </div>
+      <button class="prem-arrow" onclick="premGo(premCurrent-1)">&#8249;</button>
+    </div>
+
+    <!-- ===== كارت الفيلا ===== -->
+    <div style="margin-top:40px;">
+      <div style="border-radius:28px;overflow:hidden;border:1.5px solid rgba(184,147,74,0.45);box-shadow:0 0 80px rgba(184,147,74,0.1);background:linear-gradient(160deg,rgba(184,147,74,0.07),rgba(26,53,51,0.6));position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-light),var(--gold),transparent);"></div>
+
+        <!-- فيديو Cloudinary -->
+        <div style="width:100%;border-radius:28px 28px 0 0;overflow:hidden;background:#000;">
+          <iframe
+            src="https://player.cloudinary.com/embed/?cloud_name=dgsb7axpp&public_id=VID-20260510-WA0052_uotzzi&autoplay=true&muted=true&loop=true&controls=true"
+            style="width:100%;aspect-ratio:9/16;border:none;display:block;max-height:600px;"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowfullscreen
+            frameborder="0"
+          ></iframe>
+        </div>
+
+        <!-- محتوى الكارت -->
+        <div style="padding:36px 32px;">
+          <div style="font-size:12px;color:var(--gold);letter-spacing:3px;font-weight:700;margin-bottom:10px;">✦ حصري — وحدة واحدة فقط</div>
+          <h3 style="font-family:'Amiri',serif;font-size:34px;color:white;margin:0 0 12px;">الفيلا</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:14px;line-height:1.8;margin:0 0 20px;">تجربة إقامة على مستوى مختلف — فيلا مستقلة بدورين وحمام سباحة خاص لمن يبحث عن أعلى مستوى من الخصوصية.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:9px;">
+            <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> دورين — ٣ غرف نوم — ٢ حمام</li>
+            <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> جاردن وحمام سباحة خاص</li>
+            <li style="color:rgba(255,255,255,0.75);font-size:14px;display:flex;align-items:center;gap:8px;"><span style="color:var(--gold);">✦</span> مكيفة بالكامل</li>
+          </ul>
+          <div style="background:rgba(184,147,74,0.07);border:1px solid rgba(184,147,74,0.2);border-radius:12px;padding:14px;text-align:center;margin-bottom:16px;">
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);">للسعر تواصل معنا مباشرةً</div>
+          </div>
+          <a href="https://wa.me/201015753775?text=مرحبا،%20عايز%20أعرف%20سعر%20الفيلا" target="_blank" style="display:block;text-align:center;padding:13px;background:linear-gradient(135deg,#25D366,#1aab52);color:white;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;border-radius:12px;text-decoration:none;">💬 استفسر على واتساب</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<script>
+  let premCurrent = 0;
+  const premTotal = 4;
+  const premTrack = document.getElementById('premTrack');
+  const premDotBtns = document.querySelectorAll('#premDots .prem-dot-btn');
+
+  function premGo(n) {
+    premCurrent = ((n % premTotal) + premTotal) % premTotal;
+    premTrack.style.transform = `translateX(${premCurrent * 100}%)`;
+    premDotBtns.forEach((d,i) => d.classList.toggle('active', i === premCurrent));
+  }
+
+  // Touch swipe
+  let premStartX = 0;
+  const premWrap = document.getElementById('premSliderWrap');
+  premWrap.addEventListener('touchstart', e => premStartX = e.touches[0].clientX, {passive:true});
+  premWrap.addEventListener('touchend', e => {
+    const diff = premStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) premGo(premCurrent + (diff > 0 ? -1 : 1));
+  });
+</script>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
@@ -3104,6 +3332,32 @@ function switchGuideTab(btn, panelId) {
           <input id="b-children" type="number" min="0" max="15" placeholder="٠" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='var(--turq)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
         </div>
       </div>
+      <!-- مساحة الشاليه -->
+      <div>
+        <label style="color:rgba(255,255,255,0.7);font-size:13px;display:block;margin-bottom:8px;">مساحة الشاليه *</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <label id="size-48-label" onclick="selectSize('48')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;font-size:14px;color:rgba(255,255,255,0.8);">
+            <span style="font-size:18px;">🛏️</span> ٤٨ متر²
+          </label>
+          <label id="size-75-label" onclick="selectSize('75')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;font-size:14px;color:rgba(255,255,255,0.8);">
+            <span style="font-size:18px;">🛏️</span> ٧٥ متر²
+          </label>
+        </div>
+        <input type="hidden" id="b-size">
+      </div>
+      <!-- علوي أو أرضي -->
+      <div>
+        <label style="color:rgba(255,255,255,0.7);font-size:13px;display:block;margin-bottom:8px;">نوع الدور *</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <label id="floor-up-label" onclick="selectFloor('علوي')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;font-size:14px;color:rgba(255,255,255,0.8);">
+            <span style="font-size:18px;">⬆️</span> علوي
+          </label>
+          <label id="floor-ground-label" onclick="selectFloor('أرضي')" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;font-size:14px;color:rgba(255,255,255,0.8);">
+            <span style="font-size:18px;">⬇️</span> أرضي
+          </label>
+        </div>
+        <input type="hidden" id="b-floor">
+      </div>
     </div>
 
     <button onclick="submitBooking()" style="width:100%;margin-top:24px;padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-size:16px;font-weight:700;border:none;border-radius:14px;cursor:pointer;font-family:inherit;transition:opacity 0.2s;">
@@ -3164,12 +3418,30 @@ function switchGuideTab(btn, panelId) {
   // ===== BOOKING MODAL =====
   let _bookingData = {};
 
+  function selectSize(val) {
+    document.getElementById('b-size').value = val;
+    document.getElementById('size-48-label').style.borderColor = val === '48' ? 'var(--turq)' : 'rgba(255,255,255,0.15)';
+    document.getElementById('size-48-label').style.background  = val === '48' ? 'rgba(90,158,155,0.2)' : 'rgba(255,255,255,0.07)';
+    document.getElementById('size-75-label').style.borderColor = val === '75' ? 'var(--turq)' : 'rgba(255,255,255,0.15)';
+    document.getElementById('size-75-label').style.background  = val === '75' ? 'rgba(90,158,155,0.2)' : 'rgba(255,255,255,0.07)';
+  }
+
+  function selectFloor(val) {
+    document.getElementById('b-floor').value = val;
+    document.getElementById('floor-up-label').style.borderColor     = val === 'علوي' ? 'var(--gold)' : 'rgba(255,255,255,0.15)';
+    document.getElementById('floor-up-label').style.background      = val === 'علوي' ? 'rgba(184,147,74,0.18)' : 'rgba(255,255,255,0.07)';
+    document.getElementById('floor-ground-label').style.borderColor = val === 'أرضي' ? 'var(--gold)' : 'rgba(255,255,255,0.15)';
+    document.getElementById('floor-ground-label').style.background  = val === 'أرضي' ? 'rgba(184,147,74,0.18)' : 'rgba(255,255,255,0.07)';
+  }
+
   function openBooking(type, chaletName, price) {
     _bookingData = { type: type||'', chaletName: chaletName||'', price: price||'' };
     document.getElementById('modal-title').textContent = chaletName || 'احجز شاليهك';
     document.getElementById('modal-type').textContent  = type  || 'اختر من قائمة الأسعار';
     document.getElementById('modal-price').textContent = price || '—';
-    ['b-name','b-phone','b-checkin','b-nights','b-guests','b-children'].forEach(id => document.getElementById(id).value = '');
+    ['b-name','b-phone','b-checkin','b-nights','b-guests','b-children','b-size','b-floor'].forEach(id => document.getElementById(id).value = '');
+    // reset visual selection
+    selectSize(''); selectFloor('');
     const m = document.getElementById('booking-modal');
     m.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -3187,9 +3459,19 @@ function switchGuideTab(btn, panelId) {
     const nights  = document.getElementById('b-nights').value.trim();
     const guests   = document.getElementById('b-guests').value.trim();
     const children = document.getElementById('b-children').value.trim();
+    const size     = document.getElementById('b-size').value;
+    const floor    = document.getElementById('b-floor').value;
 
     if (!name || !phone || !checkin || !nights) {
       alert('من فضلك اكمل الحقول المطلوبة (*)');
+      return;
+    }
+    if (!size) {
+      alert('من فضلك اختر مساحة الشاليه (٤٨ أو ٧٥ متر)');
+      return;
+    }
+    if (!floor) {
+      alert('من فضلك اختر نوع الدور (علوي أو أرضي)');
       return;
     }
 
@@ -3199,6 +3481,8 @@ function switchGuideTab(btn, panelId) {
     _bookingData.nights   = nights;
     _bookingData.guests   = guests || 'غير محدد';
     _bookingData.children = children || '٠';
+    _bookingData.size     = size + ' متر²';
+    _bookingData.floor    = floor;
 
     // Close form, show guidelines
     closeBooking();
@@ -3220,6 +3504,8 @@ function switchGuideTab(btn, panelId) {
     document.getElementById('b-nights').value  = _bookingData.nights;
     document.getElementById('b-guests').value    = _bookingData.guests !== 'غير محدد' ? _bookingData.guests : '';
     document.getElementById('b-children').value  = _bookingData.children !== '٠' ? _bookingData.children : '';
+    if (_bookingData.size)  selectSize(_bookingData.size.replace(' متر²',''));
+    if (_bookingData.floor) selectFloor(_bookingData.floor);
   }
 
   function agreeAndSend() {
@@ -3227,8 +3513,10 @@ function switchGuideTab(btn, panelId) {
     const msg = `🏖️ *طلب حجز جديد — شاليهات هشام العبد*\n\n` +
       `👤 *الاسم:* ${d.customerName}\n` +
       `📞 *الموبايل:* ${d.phone}\n` +
-      `🏠 *نوع الشاليه:* ${d.chaletName} (${d.type})\n` +
-      `💰 *السعر:* ${d.price} جنيه/ليلة\n` +
+      `🏠 *نوع الشاليه:* ${d.chaletName}${d.type ? ' (' + d.type + ')' : ''}\n` +
+      `📐 *المساحة:* ${d.size || 'غير محدد'}\n` +
+      `🏢 *الدور:* ${d.floor || 'غير محدد'}\n` +
+      `💰 *السعر:* ${d.price ? d.price + ' جنيه/ليلة' : 'للاستفسار'}\n` +
       `📅 *تاريخ الوصول:* ${d.checkin}\n` +
       `🌙 *عدد الليالي:* ${d.nights}\n` +
       `👥 *عدد الأفراد:* ${d.guests}\n` +
